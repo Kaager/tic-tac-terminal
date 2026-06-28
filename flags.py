@@ -17,6 +17,7 @@ def run_flag_game():
         count += 1
         separator_print()
     print(f"{player} wins!!!")
+    _ = input()
 
 def rules_print() -> None:
     rules = """21 FLAGS
