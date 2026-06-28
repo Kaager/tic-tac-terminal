@@ -5,6 +5,9 @@ def run_flag_game():
 
     rules_print()
 
+    pvp_mode(num_flags)
+
+def pvp_mode(num_flags):
     count = 1
     while num_flags > 0:
         if count % 2 == 1:
