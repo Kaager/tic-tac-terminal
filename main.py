@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 from flags import run_flag_game
 
@@ -15,7 +16,8 @@ def main():
 def clear_cls():
     # clear terminal, choose correct command based on os.name
     # which will be nt for windows, and posix for linux/macos
-    os.system("cls" if os.name == "nt" else "clear")
+    # soft deprecate: os.system("cls" if os.name == "nt" else "clear")
+    subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 def welcome_print() -> None:
     print("Welcome to Tic-Tac-Terminal")
@@ -36,4 +38,8 @@ def main_menu() -> None:
         sys.exit()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nExiting gracefully. Goodbye!!!")
+        sys.exit(0)
