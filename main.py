@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 from flags import run_flag_game
+from helpers import clear_cls
 
 def main():
 
@@ -13,17 +14,13 @@ def main():
         clear_cls()
         main_menu()
 
-def clear_cls():
-    # clear terminal, choose correct command based on os.name
-    # which will be nt for windows, and posix for linux/macos
-    # soft deprecate: os.system("cls" if os.name == "nt" else "clear")
-    subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+
 
 def welcome_print() -> None:
     print("Welcome to Tic-Tac-Terminal")
 
 def main_menu() -> None:
-    print("--Menu--")
+    print("--Main Menu--")
     print("1. Tic-Tac-Toe")
     print("2. 21 Flags - Bonus game")
     print("3. Exit")
@@ -32,7 +29,6 @@ def main_menu() -> None:
     if choice == 1:
         pass
     elif choice == 2:
-        clear_cls()
         run_flag_game()
     elif choice == 3:
         sys.exit()
