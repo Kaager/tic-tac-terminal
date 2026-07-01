@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 from helpers import clear_cls
 
 def run_flag_game():
@@ -64,13 +65,63 @@ def choose_pve_difficulty(num_flags: int) -> None:
     user_choice = get_user_menu_input(4)
 
     if user_choice == 1:
-        pass
+        pve_normal(num_flags)
     elif user_choice == 2:
         pass
     elif user_choice == 3:
         pass
     elif user_choice == 4:
         pass
+
+
+def pve_normal(num_flags: int) -> None:
+    player: str = ""
+    count: int = get_starting_player()
+    clear_cls()
+    rules_print()
+    while num_flags > 0:
+        draw_flags(num_flags)
+        if count % 2 == 1:
+            player = "Player"
+            player_input = get_user_game_input(player)
+            num_flags -= player_input
+        elif count % 2 == 0:
+            player = "Bot"
+            if num_flags <= 3:
+                bot_choice = 3
+            elif num_flags == 5:
+                bot_choice= 1
+            elif num_flags == 6:
+                bot_choice = 2
+            elif num_flags == 7:
+                bot_choice = 3
+            else:
+                bot_choice = random.randint(1, 3)
+            print(f"Bot chose to remove {bot_choice} flag(s)")
+            num_flags -= bot_choice
+        count += 1
+        separator_print()
+
+    print(f"{player} wins!!!")
+    _ = input()
+
+
+def get_starting_player() -> int:
+    clear_cls()
+    rules_print()
+    print("--Who will go first?--")
+    print("1. Player (you)")
+    print("2. Bot")
+    print("3. Random")
+
+    choice = get_user_menu_input(3)
+
+    if choice == 1:
+        return 1
+    elif choice == 2:
+        return 2
+    else:
+        return random.randint(1, 2)
 
 
 
