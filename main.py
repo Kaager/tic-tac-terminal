@@ -1,5 +1,4 @@
 import os
-import subprocess
 import sys
 from flags import run_flag_game
 from helpers import clear_cls

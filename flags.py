@@ -32,22 +32,18 @@ def flags_menu(num_flags: int) -> bool:
     return True
 
 
-def get_user_menu_input(num_menu_options: int):
-    choice = ""
-    avail_options = []
-    for i in range(num_menu_options):
-        avail_options.append(i+1)
-
-    user_input_correct = False
-    while not user_input_correct:
+def get_user_menu_input(num_menu_options: int) -> int:
+    avail_options = list(range(1, num_menu_options + 1))
+    while True:
         choice = input("Enter the digit for the option you want: ")
         try:
             choice = int(choice)
         except ValueError:
             print("Please choose a valid option!")
+            continue # skip the following check
 
         if choice in avail_options:
-            user_input_correct = True
+            break
         else:
             print("Please choose a valid option!")
     return choice
@@ -67,12 +63,60 @@ def choose_pve_difficulty(num_flags: int) -> None:
     if user_choice == 1:
         pve_normal(num_flags)
     elif user_choice == 2:
-        pass
+        pve_hard(num_flags)
     elif user_choice == 3:
-        pass
+        pve_impossible(num_flags)
     elif user_choice == 4:
         pass
 
+
+def pve_hard(num_flags: int) -> None:
+    player: str = ""
+    count: int = get_starting_player()
+    clear_cls()
+    rules_print()
+    while num_flags > 0:
+        draw_flags(num_flags)
+        if count % 2 == 1:
+            player = "Player"
+            player_input = get_user_game_input(player)
+            num_flags -= player_input
+        elif count % 2 == 0:
+            player = "Bot"
+            if num_flags > 16:
+                bot_choice = random.randint(1, 3)
+            else:
+                bot_choice = num_flags % 4
+                bot_choice = max(bot_choice, 1)
+            num_flags -= bot_choice
+            print(f"Bot chose to remove {bot_choice} flag(s)")
+        count += 1
+        separator_print()
+    print(f"{player} wins!!!")
+    input("Press Enter to continue...")
+
+
+def pve_impossible(num_flags: int) -> None:
+    player: str = ""
+    count: int = 2 # set starting player to the bot
+    clear_cls()
+    rules_print()
+    while num_flags > 0:
+        draw_flags(num_flags)
+        if count % 2 == 1:
+            player = "Player"
+            player_input = get_user_game_input(player)
+            num_flags -= player_input
+        elif count % 2 == 0:
+            player = "Bot"
+            bot_choice = num_flags % 4
+            bot_choice = max(bot_choice, 1)
+            num_flags -= bot_choice
+            print(f"Bot chose to remove {bot_choice} flag(s)")
+        count += 1
+        separator_print()
+    print(f"{player} wins!!!")
+    input("Press Enter to continue...")
 
 def pve_normal(num_flags: int) -> None:
     player: str = ""
@@ -103,8 +147,7 @@ def pve_normal(num_flags: int) -> None:
         separator_print()
 
     print(f"{player} wins!!!")
-    _ = input()
-
+    input("Press Enter to continue...")
 
 def get_starting_player() -> int:
     clear_cls()
@@ -124,7 +167,6 @@ def get_starting_player() -> int:
         return random.randint(1, 2)
 
 
-
 def pvp_mode(num_flags: int) -> None:
     player: str = ""
     count: int = 1
@@ -139,8 +181,7 @@ def pvp_mode(num_flags: int) -> None:
         count += 1
         separator_print()
     print(f"{player} wins!!!")
-    _ = input()
-
+    input("Press Enter to continue...")
 
 def rules_print() -> None:
     rules = """21 FLAGS
