@@ -1,7 +1,7 @@
 import os
 import sys
 import random
-from helpers import clear_cls
+from helpers import clear_cls, get_user_menu_choice
 
 def run_flag_game():
     num_flags = 21
@@ -18,7 +18,7 @@ def flags_menu(num_flags: int) -> bool:
     print("3. Main Menu")
     print("4. Quit")
     
-    choice = get_user_menu_input(4)
+    choice = get_user_menu_choice(4)
             
     if choice == 1:
         pvp_mode(num_flags)
@@ -32,23 +32,6 @@ def flags_menu(num_flags: int) -> bool:
     return True
 
 
-def get_user_menu_input(num_menu_options: int) -> int:
-    avail_options = list(range(1, num_menu_options + 1))
-    while True:
-        choice = input("Enter the digit for the option you want: ")
-        try:
-            choice = int(choice)
-        except ValueError:
-            print("Please choose a valid option!")
-            continue # skip the following check
-
-        if choice in avail_options:
-            break
-        else:
-            print("Please choose a valid option!")
-    return choice
-
-
 def choose_pve_difficulty(num_flags: int) -> None:
     clear_cls()
     rules_print()
@@ -58,7 +41,7 @@ def choose_pve_difficulty(num_flags: int) -> None:
     print("3. Impossible")
     print("4. Back")
 
-    user_choice = get_user_menu_input(4)
+    user_choice = get_user_menu_choice(4)
 
     if user_choice == 1:
         pve_normal(num_flags)
@@ -157,7 +140,7 @@ def get_starting_player() -> int:
     print("2. Bot")
     print("3. Random")
 
-    choice = get_user_menu_input(3)
+    choice = get_user_menu_choice(3)
 
     if choice == 1:
         return 1

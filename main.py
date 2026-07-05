@@ -1,7 +1,7 @@
 import os
 import sys
 from flags import run_flag_game
-from helpers import clear_cls
+from helpers import clear_cls, get_user_menu_choice
 
 def main():
 
@@ -23,7 +23,7 @@ def main_menu() -> None:
     print("1. Tic-Tac-Toe")
     print("2. 21 Flags - Bonus game")
     print("3. Exit")
-    choice = int(input("Enter the digit of the option you want: "))
+    choice = get_user_menu_choice(3)
 
     if choice == 1:
         pass
