@@ -19,12 +19,25 @@ def ttt_menu() -> bool:
     choice = get_user_menu_choice(4)
 
     if choice == 1:
-        pass
+        pvp_mode()
     elif choice == 2:
         pass
     elif choice == 3:
         return False
     elif choice == 4:
         sys.exit(0)
-
     return True
+
+
+def pvp_mode() -> None:
+    board: list[list[int | str]] = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+    ]
+
+    ttt_board_print(board)
+    input("Press Enter to continue...!")
+
+def ttt_board_print(board: list[list[int | str]]) -> None:
+    print(f"#{board[0][0]}#{board[0][1]}#{board[0][2]}#")
