@@ -1,5 +1,6 @@
 import os
 import sys
+from tic_tac_toe import run_tic_tac_toe
 from flags import run_flag_game
 from helpers import clear_cls, get_user_menu_choice
 
@@ -26,7 +27,7 @@ def main_menu() -> None:
     choice = get_user_menu_choice(3)
 
     if choice == 1:
-        pass
+       run_tic_tac_toe()
     elif choice == 2:
         run_flag_game()
     elif choice == 3:

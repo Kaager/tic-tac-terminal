@@ -116,6 +116,8 @@ def pve_normal(num_flags: int) -> None:
             player = "Bot"
             if num_flags <= 3:
                 bot_choice = 3
+            elif num_flags == 4:
+                bot_choice = 1
             elif num_flags == 5:
                 bot_choice= 1
             elif num_flags == 6:
