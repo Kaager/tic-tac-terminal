@@ -30,14 +30,14 @@ def ttt_menu() -> bool:
 
 
 def pvp_mode() -> None:
-    board: list[list[int | str]] = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0],
+    board: list[list[str]] = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "],
     ]
 
     ttt_board_print(board)
     input("Press Enter to continue...!")
 
-def ttt_board_print(board: list[list[int | str]]) -> None:
+def ttt_board_print(board: list[list[str]]) -> None:
     print(f"#{board[0][0]}#{board[0][1]}#{board[0][2]}#")
