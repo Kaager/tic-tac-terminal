@@ -31,13 +31,26 @@ def ttt_menu() -> bool:
 
 def pvp_mode() -> None:
     board: list[list[str]] = [
-        [" ", " ", " "],
-        [" ", " ", " "],
-        [" ", " ", " "],
+        ["X", "x", " "],
+        ["O", "o", "0"],
+        ["0", "X", "0"],
     ]
 
     ttt_board_print(board)
     input("Press Enter to continue...!")
 
 def ttt_board_print(board: list[list[str]]) -> None:
-    print(f"#{board[0][0]}#{board[0][1]}#{board[0][2]}#")
+    row_num: int = 0
+    final_board_size: int = len(board) * 2 - 1
+    sep_pieces: list[str] = ["---"] * len(board)
+    seperator: str = "+".join(sep_pieces)
+
+    print()    
+    for i in range(final_board_size):
+        if i % 2 == 0:
+            row_str = " | ".join(board[row_num])
+            row_num += 1
+            print(" " + row_str + " ")
+        if i % 2 == 1:
+            print(seperator)
+    print()
