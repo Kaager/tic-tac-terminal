@@ -40,17 +40,13 @@ def pvp_mode() -> None:
     input("Press Enter to continue...!")
 
 def ttt_board_print(board: list[list[str]]) -> None:
-    row_num: int = 0
-    final_board_size: int = len(board) * 2 - 1
     sep_pieces: list[str] = ["---"] * len(board)
     seperator: str = "+".join(sep_pieces)
 
-    print()    
-    for i in range(final_board_size):
-        if i % 2 == 0:
-            row_str = " | ".join(board[row_num])
-            row_num += 1
-            print(" " + row_str + " ")
-        if i % 2 == 1:
+    print()
+    for i, row in enumerate(board):
+        row_str = " | ".join(row)
+        print(" " + row_str + " ")
+        if i != len(board) - 1:
             print(seperator)
     print()
