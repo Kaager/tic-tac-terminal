@@ -31,13 +31,24 @@ def ttt_menu() -> bool:
 
 def pvp_mode() -> None:
     board: list[list[str]] = [
-        ["X", "x", " "],
-        ["O", "o", "0"],
-        ["0", "X", "0"],
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "],
     ]
 
-    ttt_board_print(board)
-    input("Press Enter to continue...!")
+    while True:
+        ttt_board_print(board)
+        player_choice = get_user_menu_choice(9)
+        place_choice_on_board(player_choice, "X", board)
+
+
+def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> None:
+    # need something to check if the field is non-empty
+    row: int = (choice - 1) // len(board)
+    column: int = (choice -1) % len(board)
+    board[row][column] = icon
+
+
 
 def ttt_board_print(board: list[list[str]]) -> None:
     sep_pieces: list[str] = ["---"] * len(board)
