@@ -14,9 +14,10 @@ def ttt_menu() -> bool:
     print("1. PvP")
     print("2. PvE")
     print("3. Main Menu")
-    print("4. Quit")
+    print("4. How to play")
+    print("5. Quit")
 
-    choice = get_user_menu_choice(4)
+    choice = get_user_menu_choice(5)
 
     if choice == 1:
         pvp_mode()
@@ -25,6 +26,8 @@ def ttt_menu() -> bool:
     elif choice == 3:
         return False
     elif choice == 4:
+        how_to_play()
+    elif choice == 5:
         sys.exit(0)
     return True
 
@@ -35,7 +38,7 @@ def pvp_mode() -> None:
         [" ", " ", " "],
         [" ", " ", " "],
     ]
-
+    
     while True:
         ttt_board_print(board)
         player_choice = get_user_menu_choice(9)
@@ -48,6 +51,19 @@ def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> Non
     column: int = (choice -1) % len(board)
     board[row][column] = icon
 
+
+def how_to_play() -> None:
+    ref_board = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"]
+    ]
+    how_to = """--How to play--
+To place your piece, enter the digit for the corresponding field. The fields are numbered like this:"""
+    clear_cls()
+    print(how_to)
+    ttt_board_print(ref_board)
+    input("Press Enter to continue...!")
 
 
 def ttt_board_print(board: list[list[str]]) -> None:
