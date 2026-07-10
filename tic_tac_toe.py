@@ -38,11 +38,24 @@ def pvp_mode() -> None:
         [" ", " ", " "],
         [" ", " ", " "],
     ]
-    
+    player1_icon = "X"
+    player2_icon = "O"
+    turn_count = 1
+
     while True:
+        clear_cls()
         ttt_board_print(board)
+        if turn_count % 2 == 1:
+            player = f"Player 1 ({player1_icon})"
+            icon = player1_icon
+        elif turn_count % 2 == 0:
+            player = f"Player 2 ({player2_icon})"
+            icon = player2_icon
+        print(player)
         player_choice = get_user_menu_choice(9)
-        place_choice_on_board(player_choice, "X", board)
+        place_choice_on_board(player_choice, icon, board)
+
+        turn_count += 1
 
 
 def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> None:
