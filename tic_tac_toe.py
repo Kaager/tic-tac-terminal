@@ -1,6 +1,7 @@
 import sys
 from helpers import clear_cls, get_user_menu_choice
 
+EMPTY = " "
 
 def run_tic_tac_toe() -> None:
     run_ttt = True
@@ -53,16 +54,24 @@ def pvp_mode() -> None:
             icon = player2_icon
         print(player)
         player_choice = get_user_menu_choice(9)
-        place_choice_on_board(player_choice, icon, board)
-
+        placement_success = place_choice_on_board(player_choice, icon, board)
+        while not placement_success:
+            print("Chosen field was not empty, please choose an empty field!")
+            player_choice = get_user_menu_choice(9)
+            placement_success = place_choice_on_board(player_choice, icon, board)
         turn_count += 1
 
 
-def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> None:
-    # need something to check if the field is non-empty
+def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> bool:
     row: int = (choice - 1) // len(board)
-    column: int = (choice -1) % len(board)
+    column: int = (choice - 1) % len(board)
+    
+    # check if the field is empty, if it is not = return False
+    if board[row][column] != EMPTY:
+        return False
+
     board[row][column] = icon
+    return True
 
 
 def how_to_play() -> None:
