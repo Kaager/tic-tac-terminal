@@ -46,6 +46,12 @@ def pvp_mode() -> None:
     while True:
         clear_cls()
         ttt_board_print(board)
+
+        if is_board_full(board):
+            print("Game ended in a draw!")
+            input("Press Enter to continue...")
+            break
+
         if turn_count % 2 == 1:
             player = f"Player 1 ({player1_icon})"
             icon = player1_icon
@@ -59,8 +65,15 @@ def pvp_mode() -> None:
             print("Chosen field was not empty, please choose an empty field!")
             player_choice = get_user_menu_choice(9)
             placement_success = place_choice_on_board(player_choice, icon, board)
+
         turn_count += 1
 
+def is_board_full(board: list[list[str]]) -> bool:
+    for row in board:
+        for cell in row:
+            if cell == EMPTY:
+                return False
+    return True
 
 def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> bool:
     row: int = (choice - 1) // len(board)
