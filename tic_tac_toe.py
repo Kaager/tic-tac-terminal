@@ -66,7 +66,54 @@ def pvp_mode() -> None:
             player_choice = get_user_menu_choice(9)
             placement_success = place_choice_on_board(player_choice, icon, board)
 
+        if check_winner(board, icon):
+            clear_cls()
+            ttt_board_print(board)
+            print(f"{player} wins!!!")
+            input("Press enter to continue!")
+            break
+
         turn_count += 1
+
+
+def check_winner(board: list[list[str]], icon: str) -> bool:
+    board_size = len(board)
+
+    # check rows
+    for row in board:
+        count = 0
+        for cell in row:
+            if cell == icon:
+                count += 1
+        if count == board_size:
+            return True
+
+    # check columns
+    for col in range(board_size):
+        count = 0
+        for row in range(board_size):
+            if board[row][col] == icon:
+                count += 1
+        if count == board_size:
+            return True
+
+    # check diagonals
+    count = 0
+    for i in range(board_size):
+        if board[i][i] == icon:
+            count += 1
+    if count == board_size:
+        return True
+    
+    count = 0
+    for i in range(board_size):
+        if board[i][board_size - 1 - i] == icon:
+            count += 1
+    if count == board_size:
+        return True
+    
+    # no matches found:
+    return False
 
 def is_board_full(board: list[list[str]]) -> bool:
     for row in board:
@@ -74,6 +121,7 @@ def is_board_full(board: list[list[str]]) -> bool:
             if cell == EMPTY:
                 return False
     return True
+
 
 def place_choice_on_board(choice: int, icon: str, board: list[list[str]]) -> bool:
     row: int = (choice - 1) // len(board)
